@@ -20,10 +20,6 @@ export default function Order() {
         price = intl.format(selectedPizza.sizes ? selectedPizza.sizes[pizzaSize] : "")
     }
 
-    useEffect(() => {
-        fetchPizzaTypes();
-    }, [])
-
     async function fetchPizzaTypes() {
         await new Promise((resolve) => setTimeout(resolve, 3000)); // remove this later, just to show you the loading state
 
@@ -32,6 +28,10 @@ export default function Order() {
         setPizzaTypes(pizzasJson);
         setLoading(false);
     }
+
+    useEffect(() => {
+        fetchPizzaTypes();
+    }, [])
     
 
     return (
