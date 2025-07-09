@@ -22,13 +22,17 @@ function ContactRoute() {
   return (
     <div className="contact">
       <h2>Contact</h2>
-      {mutation.isSucess ? (
+      {mutation.isSuccess ? (
         <h3>Submitted!</h3>
-      ) : (
+      ) :
+      mutation.isError ? (
+        <h3>Error!</h3>
+      ) :
+      (
         <form onSubmit={mutation.mutate}>
-          <input name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <textarea placeholder="Message" name="message"></textarea>
+          <input name="name" placeholder="Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <textarea placeholder="Message" name="message" required ></textarea>
           <button>Submit</button>
         </form>
       )}
