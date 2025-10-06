@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import postContact from "../api/postContact"
+// import { useFormStatus } from "react-dom"; // note react-dom, not react
+// ^ react 19 change that can be used
 
 export const Route = createLazyFileRoute('/contact')({
   component: ContactRoute,
@@ -8,9 +10,7 @@ export const Route = createLazyFileRoute('/contact')({
 
 export function ContactRoute() {
   const mutation = useMutation({
-    mutationFn: function(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
+    mutationFn: function(formData) {
       return postContact(
         formData.get("name"),
         formData.get("email"),
@@ -18,6 +18,8 @@ export function ContactRoute() {
       )
     }
   })
+
+  // const { pending } = useFormStatus(); <--- useFormStatus will give you access to status of form
 
   return (
     <div className="contact">
@@ -29,7 +31,7 @@ export function ContactRoute() {
         <h3>Error!</h3>
       ) :
       (
-        <form onSubmit={mutation.mutate}>
+        <form action={mutation.mutate}>
           <input name="name" placeholder="Name" required />
           <input type="email" name="email" placeholder="Email" required />
           <textarea placeholder="Message" name="message" required ></textarea>
