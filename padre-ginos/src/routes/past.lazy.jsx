@@ -6,6 +6,33 @@ import getPastOrder from '../api/getPastOrder';
 import Modal from '../Modal'
 import ErrorBoundary from '../ErrorBoundary';
 
+// import { Suspense, use } from "react"
+
+// first line in PastOrderRoute
+// const data = use(loadedPromise);
+// also, we had to remove the useQuery call to getPastOrders (with an S), and the related if (isLoading) return statement
+
+
+// then, surround the code to prefetch with <Suspense> </Suspense>
+// for example 
+// return (
+//     <ErrorBoundary>
+//       <Suspense
+//         fallback={
+//           <div className="past-orders">
+//             <h2>Loading Past Orders …</h2>
+//           </div>
+//         }
+//       >
+//         <PastOrdersRoute
+//           loadedPromise={loadedPromise}
+//           page={page}
+//           setPage={setPage}
+//         />
+//       </Suspense>
+//     </ErrorBoundary>
+//   );
+
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
